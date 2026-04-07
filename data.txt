@@ -1,0 +1,5 @@
+A transformer is a neural network architecture that uses attention mechanisms instead of recurrence.
+
+It allows parallel processing of sequences and is widely used in natural language processing.
+
+The sun is a star at the center of the solar system.
