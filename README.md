@@ -199,15 +199,3 @@ Build a **local, controllable AI system** capable of:
 
 Yevhen Biedniakov
 AI Engineer (in progress)
-
----
-
-## ⭐ Notes
-
-This project demonstrates:
-
-* real-world RAG pipeline
-* LLM + retrieval integration
-* system design thinking
-
-Ideal for AI/ML portfolio.
