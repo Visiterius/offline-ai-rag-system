@@ -1,35 +1,213 @@
-# 🧠 RAG AI Assistant (Local LLM + FAISS)
+# 🧠 Offline AI RAG System
 
-## Overview
-This project implements a Retrieval-Augmented Generation (RAG) system using:
+Local Retrieval-Augmented Generation (RAG) assistant powered by **FAISS**, **SentenceTransformers**, and **Ollama (LLM)**.
 
-- SentenceTransformers (embeddings)
-- FAISS (vector search)
-- Ollama (local LLM)
-- PDF ingestion pipeline
+This system enables querying your own documents (PDFs, notes, memory) with semantic search + reasoning — fully offline.
 
-## Features
-- Multi-document PDF ingestion
-- Semantic chunking
-- Vector search (FAISS)
-- LLM reasoning with context
-- Source attribution
-- Query expansion (agent-style)
-- Reranking
+---
 
-## Architecture
-PDF → Chunking → Embeddings → FAISS → Retrieval → LLM → Answer
+## 🚀 Features
 
-## Stack
-- Python
-- FAISS
-- SentenceTransformers
-- Ollama (llama3.1)
+* 📄 PDF ingestion pipeline (multi-document support)
+* 🔍 Semantic search using embeddings (e5-large-v2)
+* 🧠 Local LLM via Ollama (llama3.1)
+* 🔀 Multi-query retrieval (agent-style query expansion)
+* 🎯 Re-ranking for better context selection
+* 💬 Conversational memory (persistent + session)
+* 📚 Source attribution (trace answers to documents)
+* ⚡ Fully offline (no API required)
 
-## Example
-Ask questions about your PDFs and get answers with sources.
+---
 
-## Future Work
-- Cross-encoder reranking
-- Memory as vector DB
-- Structured document parsing
+## 🏗️ Architecture
+
+```
+User Query
+    │
+    ▼
+Query Expansion (LLM)
+    │
+    ▼
+Embedding (SentenceTransformer)
+    │
+    ▼
+FAISS Vector Search
+    │
+    ▼
+Top-K Chunks
+    │
+    ▼
+Re-ranking (LLM)
+    │
+    ▼
+Context Assembly
+    │
+    ▼
+LLM (Ollama)
+    │
+    ▼
+Final Answer + Sources
+```
+
+---
+
+## 📂 Project Structure
+
+```
+.
+├── rag_ollama.py      # Main RAG pipeline
+├── ingest_pdf.py      # PDF ingestion + indexing
+├── data/              # Input PDFs
+├── memory.txt         # Persistent memory
+├── index.faiss        # Vector index (ignored in git)
+├── chunks.npy         # Text chunks (ignored)
+├── metadata.npy       # Source mapping (ignored)
+```
+
+---
+
+## ⚙️ Setup
+
+### 1. Install dependencies
+
+```bash
+pip install sentence-transformers faiss-cpu pypdf pdfminer.six requests
+```
+
+---
+
+### 2. Install Ollama
+
+👉 https://ollama.com
+
+Run:
+
+```bash
+ollama pull llama3.1
+```
+
+---
+
+### 3. Start Ollama server
+
+```bash
+ollama serve
+```
+
+---
+
+### 4. Add your PDFs
+
+Place files into:
+
+```
+data/
+```
+
+---
+
+### 5. Build index
+
+```bash
+python ingest_pdf.py
+```
+
+---
+
+### 6. Run assistant
+
+```bash
+python rag_ollama.py
+```
+
+---
+
+## 💡 Example
+
+```
+Ask: What is transformer?
+
+→ Retrieves relevant chunks
+→ Generates grounded answer
+
+Ask: Compare transformers and CNNs
+
+→ Multi-query retrieval
+→ Structured comparison answer
+```
+
+---
+
+## 🧠 Memory System
+
+You can store facts:
+
+```
+remember The sun is a star
+```
+
+Saved into:
+
+```
+memory.txt
+```
+
+Included in retrieval pipeline.
+
+---
+
+## ⚠️ Limitations
+
+* Depends on chunk quality (semantic chunking improves results)
+* No fine-tuning (RAG ≠ training)
+* Hallucination possible if context is weak
+* Retrieval threshold tuning required
+
+---
+
+## 🔬 Future Improvements
+
+* Hybrid search (BM25 + vector)
+* Cross-encoder re-ranking
+* Streaming responses
+* UI (web interface)
+* Knowledge graph integration
+* Agent-based reasoning
+
+---
+
+## 🧠 Tech Stack
+
+* SentenceTransformers (embeddings)
+* FAISS (vector search)
+* Ollama (local LLM inference)
+* Python
+
+---
+
+## 🎯 Goal
+
+Build a **local, controllable AI system** capable of:
+
+* understanding private data
+* reasoning over documents
+* operating fully offline
+
+---
+
+## 📌 Author
+
+Yevhen Biedniakov
+AI Engineer (in progress)
+
+---
+
+## ⭐ Notes
+
+This project demonstrates:
+
+* real-world RAG pipeline
+* LLM + retrieval integration
+* system design thinking
+
+Ideal for AI/ML portfolio.
