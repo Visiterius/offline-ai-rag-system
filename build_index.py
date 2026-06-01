@@ -16,7 +16,7 @@ def chunk_text(text, chunk_size=150, overlap=30):
     return chunks
 
 
-with open("data.txt", "r") as f:
+with open("data.txt", "r", encoding="utf-8") as f:
     text = f.read()
 
 
@@ -35,5 +35,6 @@ index.add(embeddings)
 
 faiss.write_index(index, "index.faiss")
 np.save("chunks.npy", chunks)
+np.save("metadata.npy", [{"source": "data.txt", "page": 1} for _ in chunks])
 
-print("Index built")
+print(f"Index built with {len(chunks)} chunks")

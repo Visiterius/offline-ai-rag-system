@@ -2,6 +2,7 @@ import faiss
 import numpy as np
 import requests
 import re
+import os
 from sentence_transformers import SentenceTransformer
 
 chat_history = []
@@ -12,8 +13,8 @@ index = faiss.read_index("index.faiss")
 chunks = np.load("chunks.npy", allow_pickle=True)
 metadata = np.load("metadata.npy", allow_pickle=True)
 
-OLLAMA_URL = "http://172.23.208.1:11434/api/generate"
-MODEL_NAME = "llama3.1"
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
+MODEL_NAME = os.getenv("OLLAMA_MODEL", "llama3.1")
 
 def rerank(query, chunks):
     joined = "\n\n".join([f"[{i}] {c}" for i, c in enumerate(chunks)])
@@ -74,7 +75,10 @@ def retrieve(query, top_k=20):
     sources = []
 
     for sub in all_queries:
-        emb = model.encode([f"query: {sub}"])
+        emb = model.encode(
+            [f"query: {sub}"],
+            normalize_embeddings=True,
+        )
         emb = np.array(emb).astype('float32')
 
         distances, indices = index.search(emb, top_k)

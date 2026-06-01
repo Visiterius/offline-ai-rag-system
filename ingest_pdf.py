@@ -90,6 +90,9 @@ for doc in documents:
             })
 
 
+if not chunks:
+    raise SystemExit("No indexable chunks found. Add PDFs to data/ or add memory.txt, then run again.")
+
 
 np.save("metadata.npy", metadata)
 

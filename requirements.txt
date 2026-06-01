@@ -1,0 +1,5 @@
+sentence-transformers>=3.0.0
+faiss-cpu>=1.8.0
+numpy>=1.26.0
+pdfminer.six>=20231228
+requests>=2.31.0
