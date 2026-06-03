@@ -203,16 +203,6 @@ Ask: Use my preference and explain the document.
 exit
 ```
 
-## Interview talking points
-
-Use these to explain the project clearly:
-
-- **Problem:** private documents should not always be sent to cloud LLM APIs.
-- **Solution:** keep retrieval and generation local with embeddings + FAISS + Ollama.
-- **Key engineering decision:** separate indexing (`ingest_pdf.py`) from querying (`rag_ollama.py`) so expensive embedding work is not repeated every question.
-- **RAG limitation:** the model only answers well if retrieval finds relevant chunks; chunking and metadata quality matter.
-- **Next production step:** add a small Streamlit/FastAPI UI, hybrid BM25 + vector search, and evaluation tests for retrieval quality.
-
 ## Tech stack
 
 - Python
