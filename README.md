@@ -213,16 +213,8 @@ exit
 - pdfminer.six
 - Ollama
 
-## Roadmap
-
-- [ ] Add Streamlit or FastAPI web UI
-- [ ] Add hybrid BM25 + vector search
-- [ ] Add retrieval evaluation set
-- [ ] Add Docker Compose with Ollama service
-- [ ] Add streaming token output
-- [ ] Add document-level filters and better metadata
 
 ## Author
 
 **Yevhen Biedniakov**  
-Dental CAD/CAM professional transitioning into AI engineering, focused on local/private AI, RAG systems, and domain-specific AI for MedTech and dental CAD/CAM workflows.
+Dental CAD/CAM engineer transitioning into AI engineering, focused on local/private AI, RAG systems, and domain-specific AI for MedTech and dental CAD/CAM workflows.
